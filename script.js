@@ -19,4 +19,33 @@ cardNumberInput.addEventListener("input", (e) => {
         formatted += value[i];
     }
     e.target.value = formatted;
+
+    if (value.length === 16) {
+        expiryInput.focus();
+    }
+});
+
+expiryInput.addEventListener("input", (e) => {
+    let value = e.target.value.replace(/\D/g, "");
+    value = value.substring(0, 4);
+
+    if (value >= 2) {
+        let month = parseInt(value.substring(0, 2));
+        if (month > 12) {
+            month = 12;
+        }
+        if (month < 1) {
+            month = 1;
+        }
+        value = month.toString().padStart(2, "0") + value.substring(2);
+    }
+
+    if (value.length > 2) {
+        value = value.substring(0, 2) + " / " + value.substring(2);
+    }
+    e.target.value = value;
+
+    if (value.replace(/\D/g, "").length === 4) {
+        cvvInput.focus();
+    }
 });
