@@ -49,3 +49,14 @@ expiryInput.addEventListener("input", (e) => {
         cvvInput.focus();
     }
 });
+
+cvvInput.addEventListener("input", (e) => {
+    let value = e.target.value.replace(/\D/g, "");
+    value = value.substring(0, 3);
+
+    e.target.value = value;
+
+    if (value.length === 3) {
+        nameInput.focus();
+    }
+});
